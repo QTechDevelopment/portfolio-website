@@ -149,25 +149,26 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                         <div style={styles.logoContainer}>
                             <div>
                                 <p style={styles.green}>
-                                    <b>Heffernan,</b>{' '}
+                                    <b>Nettles,</b>{' '}
                                 </p>
                                 <p style={styles.green}>
-                                    <b>Henry Inc.</b>
+                                    <b>Cequan Inc.</b>
                                 </p>
                             </div>
                         </div>
                         <div style={styles.headerInfo}>
-                            <p>Released: 01/13/2000</p>
-                            <p>HHBIOS (C)2000 Heffernan Henry Inc.,</p>
+                            <p>Released: 01/01/1995</p>
+                            <p>CNBIOS (C)2024 Nettles Cequan Inc.,</p>
                         </div>
                     </div>
                     <div style={styles.body} className="loading-screen-body">
                         <p>HSP S13 2000-2022 Special UC131S</p>
+                        <p>CNP IT Systems 2024 Enterprise Edition</p>
                         <div style={styles.spacer} />
                         {showBiosInfo && (
                             <>
-                                <p>HSP Showcase(tm) XX 113</p>
-                                <p>Checking RAM : {14000} OK</p>
+                                <p>CNP Showcase(tm) IT 2024</p>
+                                <p>Checking RAM : {32000} OK</p>
                                 <div style={styles.spacer} />
                                 <div style={styles.spacer} />
                                 {showLoadingResources ? (
@@ -195,9 +196,9 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                             <p>
                                 All Content Loaded, launching{' '}
                                 <b style={styles.green}>
-                                    'Henry Heffernan Portfolio Showcase'
+                                    'Cequan Nettles IT Portfolio'
                                 </b>{' '}
-                                V1.0
+                                V2024.1
                             </p>
                         )}
                         <div style={styles.spacer} />
@@ -227,7 +228,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                     <p>But do enjoy what I have done so far :)</p>
                     <div style={styles.spacer} />
                     <div style={styles.spacer} /> */}
-                    <p>Henry Heffernan Portfolio Showcase 2022</p>
+                    <p>Cequan Nettles IT Portfolio Showcase 2024</p>
                     {mobileWarning && (
                         <>
                             <br />

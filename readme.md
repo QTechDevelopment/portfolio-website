@@ -1,6 +1,8 @@
-# henryheffernan.com
+# cequannettles.com
 
-This is one of two repositories created for my portfolio website <a href="https://henryheffernan.com/"><samp>henryheffernan.com</samp></a>. If you are looking for the 2D OS repository you can find it <a href="https://github.com/henryjeff/portfolio-inner-site"><samp>here</samp></a>! Thanks for taking the time to check this out. If you have any questions of comments, feel free to shoot me an email at <samp><a href="mailto:henryheffernan@gmail.com">henryheffernan@gmail.com</a></samp> or you can DM me on twitter <a href="https://twitter.com/henryheffernan"><samp>@henryheffernan</samp></a>.
+# Cequan Nettles IT Portfolio
+
+This is the portfolio website for Cequan Nettles, IT Wizard Extraordinaire. This immersive 3D experience showcases my expertise in system administration, network security, cloud infrastructure, and technical support. Thanks for taking the time to check this out. If you have any questions or comments, feel free to reach out via LinkedIn at <a href="https://www.linkedin.com/in/c-nettles01/"><samp>linkedin.com/in/c-nettles01</samp></a>.
 
 <br>
 
