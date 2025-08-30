@@ -24,5 +24,21 @@ export default class Mouse extends EventEmitter {
             }
             this.inComputer = event.inComputer ? true : false;
         });
+        
+        this.on('mousedown', (event: any) => {
+            this.inComputer = event.inComputer ? true : false;
+        });
+        
+        this.on('mouseup', (event: any) => {
+            this.inComputer = event.inComputer ? true : false;
+        });
+        
+        this.on('keydown', (event: any) => {
+            this.inComputer = event.inComputer ? true : false;
+        });
+        
+        this.on('keyup', (event: any) => {
+            this.inComputer = event.inComputer ? true : false;
+        });
     }
 }

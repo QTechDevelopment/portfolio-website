@@ -46,6 +46,9 @@ export class ComputerAudio extends AudioSource {
         });
 
         document.addEventListener('keydown', (event) => {
+            // @ts-ignore
+            if (!event.inComputer) return;
+            
             if (event.key.includes('_AUTO_')) {
                 this.manager.playAudio('ccType', {
                     volume: 0.1,
@@ -57,13 +60,10 @@ export class ComputerAudio extends AudioSource {
             if (this.lastKey === event.key) return;
             this.lastKey = event.key;
 
-            // @ts-ignore
-            if (event.inComputer) {
-                this.manager.playAudio('keyboardKeydown', {
-                    volume: 0.8,
-                    position: new THREE.Vector3(-300, -400, 1200),
-                });
-            }
+            this.manager.playAudio('keyboardKeydown', {
+                volume: 0.8,
+                position: new THREE.Vector3(-300, -400, 1200),
+            });
         });
     }
 }

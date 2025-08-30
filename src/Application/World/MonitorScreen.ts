@@ -61,12 +61,12 @@ export default class MonitorScreen extends EventEmitter {
         document.addEventListener(
             'mousemove',
             (event) => {
+                const target = event.target as HTMLElement;
+                const isInComputer = target.id === 'computer-screen' || 
+                                   target.closest('#computer-screen') !== null;
+                
                 // @ts-ignore
-                const id = event.target.id;
-                if (id === 'computer-screen') {
-                    // @ts-ignore
-                    event.inComputer = true;
-                }
+                event.inComputer = isInComputer;
 
                 // @ts-ignore
                 this.inComputer = event.inComputer;
@@ -102,8 +102,13 @@ export default class MonitorScreen extends EventEmitter {
         document.addEventListener(
             'mousedown',
             (event) => {
+                const target = event.target as HTMLElement;
+                const isInComputer = target.id === 'computer-screen' || 
+                                   target.closest('#computer-screen') !== null;
+                
                 // @ts-ignore
-                this.inComputer = event.inComputer;
+                event.inComputer = isInComputer;
+                this.inComputer = isInComputer;
                 this.application.mouse.trigger('mousedown', [event]);
 
                 this.mouseClickInProgress = true;
@@ -114,8 +119,13 @@ export default class MonitorScreen extends EventEmitter {
         document.addEventListener(
             'mouseup',
             (event) => {
+                const target = event.target as HTMLElement;
+                const isInComputer = target.id === 'computer-screen' || 
+                                   target.closest('#computer-screen') !== null;
+                
                 // @ts-ignore
-                this.inComputer = event.inComputer;
+                event.inComputer = isInComputer;
+                this.inComputer = isInComputer;
                 this.application.mouse.trigger('mouseup', [event]);
 
                 if (this.shouldLeaveMonitor) {
@@ -125,6 +135,31 @@ export default class MonitorScreen extends EventEmitter {
 
                 this.mouseClickInProgress = false;
                 this.prevInComputer = this.inComputer;
+            },
+            false
+        );
+        
+        // Add keyboard event listeners
+        document.addEventListener(
+            'keydown',
+            (event) => {
+                if (this.inComputer) {
+                    // @ts-ignore
+                    event.inComputer = true;
+                    this.application.mouse.trigger('keydown', [event]);
+                }
+            },
+            false
+        );
+        
+        document.addEventListener(
+            'keyup',
+            (event) => {
+                if (this.inComputer) {
+                    // @ts-ignore
+                    event.inComputer = true;
+                    this.application.mouse.trigger('keyup', [event]);
+                }
             },
             false
         );
@@ -139,7 +174,10 @@ export default class MonitorScreen extends EventEmitter {
         container.style.width = this.screenSize.width + 'px';
         container.style.height = this.screenSize.height + 'px';
         container.style.opacity = '1';
-        container.style.background = '#1d2e2f';
+        container.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+        container.style.borderRadius = '12px';
+        container.style.border = '2px solid #007aff';
+        container.style.boxShadow = '0 0 30px rgba(0, 122, 255, 0.4)';
 
         // Create iframe
         const iframe = document.createElement('iframe');
@@ -147,6 +185,65 @@ export default class MonitorScreen extends EventEmitter {
         // Bubble mouse move events to the main application, so we can affect the camera
         iframe.onload = () => {
             if (iframe.contentWindow) {
+                // Forward events from iframe to main window
+                iframe.contentWindow.addEventListener('mousemove', (event) => {
+                    const customEvent = new CustomEvent('mousemove', {
+                        bubbles: true,
+                        cancelable: false,
+                    });
+                    // @ts-ignore
+                    customEvent.inComputer = true;
+                    // @ts-ignore
+                    customEvent.clientX = event.clientX;
+                    // @ts-ignore
+                    customEvent.clientY = event.clientY;
+                    document.dispatchEvent(customEvent);
+                });
+                
+                iframe.contentWindow.addEventListener('mousedown', (event) => {
+                    const customEvent = new CustomEvent('mousedown', {
+                        bubbles: true,
+                        cancelable: false,
+                    });
+                    // @ts-ignore
+                    customEvent.inComputer = true;
+                    document.dispatchEvent(customEvent);
+                });
+                
+                iframe.contentWindow.addEventListener('mouseup', (event) => {
+                    const customEvent = new CustomEvent('mouseup', {
+                        bubbles: true,
+                        cancelable: false,
+                    });
+                    // @ts-ignore
+                    customEvent.inComputer = true;
+                    document.dispatchEvent(customEvent);
+                });
+                
+                iframe.contentWindow.addEventListener('keydown', (event) => {
+                    const customEvent = new CustomEvent('keydown', {
+                        bubbles: true,
+                        cancelable: false,
+                    });
+                    // @ts-ignore
+                    customEvent.inComputer = true;
+                    // @ts-ignore
+                    customEvent.key = event.key;
+                    document.dispatchEvent(customEvent);
+                });
+                
+                iframe.contentWindow.addEventListener('keyup', (event) => {
+                    const customEvent = new CustomEvent('keyup', {
+                        bubbles: true,
+                        cancelable: false,
+                    });
+                    // @ts-ignore
+                    customEvent.inComputer = true;
+                    // @ts-ignore
+                    customEvent.key = event.key;
+                    document.dispatchEvent(customEvent);
+                });
+                
                 window.addEventListener('message', (event) => {
                     var evt = new CustomEvent(event.data.type, {
                         bubbles: true,
@@ -201,7 +298,7 @@ export default class MonitorScreen extends EventEmitter {
         iframe.style.padding = IFRAME_PADDING + 'px';
         iframe.style.boxSizing = 'border-box';
         iframe.style.opacity = '1';
-        iframe.className = 'jitter';
+        iframe.className = 'jitter imac-screen';
         iframe.id = 'computer-screen';
         iframe.frameBorder = '0';
         iframe.title = 'HeffernanOS';
@@ -229,12 +326,14 @@ export default class MonitorScreen extends EventEmitter {
         this.cssScene.add(object);
 
         // Create GL plane
-        const material = new THREE.MeshLambertMaterial();
+        const material = new THREE.MeshLambertMaterial({
+            color: 0xf8f9fa, // iMac white
+        });
         material.side = THREE.DoubleSide;
-        material.opacity = 0;
+        material.opacity = 0.1;
         material.transparent = true;
         // NoBlending allows the GL plane to occlude the CSS plane
-        material.blending = THREE.NoBlending;
+        material.blending = THREE.NormalBlending;
 
         // Create plane geometry
         const geometry = new THREE.PlaneGeometry(
@@ -440,7 +539,7 @@ export default class MonitorScreen extends EventEmitter {
     createEnclosingPlane(plane: EnclosingPlane) {
         const material = new THREE.MeshBasicMaterial({
             side: THREE.DoubleSide,
-            color: 0x48493f,
+            color: 0xf8f9fa, // iMac white
         });
 
         const geometry = new THREE.PlaneGeometry(plane.size.x, plane.size.y);
