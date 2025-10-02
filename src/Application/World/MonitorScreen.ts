@@ -280,8 +280,8 @@ export default class MonitorScreen extends EventEmitter {
         };
 
         // Set iframe attributes
-        // PROD
-        iframe.src = 'https://os.henryheffernan.com/';
+        // PROD - Display projects page
+        iframe.src = '../static/projects.html';
         /**
          * Use dev server is query params are present
          *
@@ -293,6 +293,9 @@ export default class MonitorScreen extends EventEmitter {
         if (urlParams.has('dev')) {
             iframe.src = 'http://localhost:3000/';
         }
+        if (urlParams.has('os')) {
+            iframe.src = 'https://os.henryheffernan.com/';
+        }
         iframe.style.width = this.screenSize.width + 'px';
         iframe.style.height = this.screenSize.height + 'px';
         iframe.style.padding = IFRAME_PADDING + 'px';
@@ -301,7 +304,7 @@ export default class MonitorScreen extends EventEmitter {
         iframe.className = 'jitter imac-screen';
         iframe.id = 'computer-screen';
         iframe.frameBorder = '0';
-        iframe.title = 'HeffernanOS';
+        iframe.title = 'NettlesOS';
 
         // Add iframe to container
         container.appendChild(iframe);
