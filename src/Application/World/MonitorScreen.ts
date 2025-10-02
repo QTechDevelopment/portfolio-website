@@ -281,7 +281,7 @@ export default class MonitorScreen extends EventEmitter {
 
         // Set iframe attributes
         // PROD - Display projects page
-        iframe.src = '../static/projects.html';
+        iframe.src = './projects.html';
         /**
          * Use dev server is query params are present
          *
