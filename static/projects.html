@@ -13,7 +13,7 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1a1a1a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -61,27 +61,30 @@
         }
         
         .project-card {
-            background: white;
+            background: #2a2a2a;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            border: 1px solid #3a3a3a;
         }
         
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            border-color: #4a4a4a;
         }
         
         .project-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
             padding: 30px;
             color: white;
+            border-bottom: 2px solid #667eea;
         }
         
         .project-card:nth-child(2) .project-header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-bottom: 2px solid #f5576c;
         }
         
         .project-header h2 {
@@ -105,7 +108,7 @@
         .project-description {
             font-size: 1.1rem;
             line-height: 1.6;
-            color: #333;
+            color: #d0d0d0;
             margin-bottom: 20px;
         }
         
@@ -142,16 +145,18 @@
         .project-status {
             margin-top: 15px;
             padding: 10px;
-            background: #f0f4ff;
+            background: #1f1f2e;
             border-radius: 8px;
             font-size: 0.9rem;
             color: #667eea;
             font-weight: 500;
+            border: 1px solid #667eea;
         }
         
         .project-card:nth-child(2) .project-status {
-            background: #fff0f5;
+            background: #2e1f1f;
             color: #f5576c;
+            border-color: #f5576c;
         }
     </style>
 </head>
