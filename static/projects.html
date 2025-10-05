@@ -13,45 +13,162 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow-x: hidden;
+            color: white;
             padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             width: 100%;
+            margin: 0 auto;
         }
         
+        /* Header Styles */
         .header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
         }
         
-        .projects-grid {
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 12px 30px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Controls Bar */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .filter-select {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .filter-select option {
+            background: #1a1a2e;
+            color: white;
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0.05) 25%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 16px;
+            height: 300px;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Grid Layout */
+        .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
         
         @media (max-width: 768px) {
-            .projects-grid {
+            .content-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -60,135 +177,206 @@
             }
         }
         
-        .project-card {
-            background: #2a2a2a;
+        /* Card Styles with Glassmorphism */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            border: 1px solid #3a3a3a;
+            position: relative;
+            overflow: hidden;
         }
         
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-            border-color: #4a4a4a;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
         
-        .project-header {
-            background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
-            padding: 30px;
-            color: white;
-            border-bottom: 2px solid #667eea;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
         }
         
-        .project-card:nth-child(2) .project-header {
-            border-bottom: 2px solid #f5576c;
+        .card:hover::before {
+            transform: scaleX(1);
         }
         
-        .project-header h2 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
         }
         
-        .project-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 10px;
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
         }
         
-        .project-body {
-            padding: 30px;
-        }
-        
-        .project-description {
-            font-size: 1.1rem;
+        .card-description {
+            font-size: 0.95rem;
             line-height: 1.6;
-            color: #d0d0d0;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
-        .project-link {
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .language-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .card-footer {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #667eea;
+            gap: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: background 0.3s ease;
         }
         
-        .project-card:nth-child(2) .project-link {
-            background: #f5576c;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
         
-        .project-link:hover {
-            background: #5568d3;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .project-card:nth-child(2) .project-link:hover {
-            background: #e04358;
-        }
-        
-        .project-link svg {
-            width: 18px;
-            height: 18px;
-        }
-        
-        .project-status {
-            margin-top: 15px;
-            padding: 10px;
-            background: #1f1f2e;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: #667eea;
-            font-weight: 500;
-            border: 1px solid #667eea;
-        }
-        
-        .project-card:nth-child(2) .project-status {
-            background: #2e1f1f;
-            color: #f5576c;
-            border-color: #f5576c;
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
         
         .social-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .social-icon:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
         
         .social-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        /* Tech Stack Tags */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .tech-tag {
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            background: rgba(118, 75, 162, 0.2);
+            color: #f093fb;
+            border: 1px solid rgba(240, 147, 251, 0.3);
         }
     </style>
 </head>
@@ -211,48 +399,391 @@
             </div>
         </div>
         
-        <div class="projects-grid">
-            <!-- Project 1: Autumn Burst -->
-            <div class="project-card" onclick="window.open('https://vibe-coding-project-o75c-xv6lqwbjn-qtechdevelopments-projects.vercel.app/', '_blank')">
-                <div class="project-header">
-                    <h2>🍂 Autumn Burst</h2>
-                    <span class="project-badge">Interactive Game</span>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('featured')">Featured Projects</button>
+            <button class="tab-button" onclick="switchTab('github')">GitHub Repositories</button>
+            <button class="tab-button" onclick="switchTab('vercel')">Live Deployments</button>
+        </div>
+        
+        <!-- Featured Projects Tab -->
+        <div id="featured-tab" class="tab-content active">
+            <div class="content-grid">
+                <div class="card" onclick="window.open('https://vibe-coding-project-o75c-xv6lqwbjn-qtechdevelopments-projects.vercel.app/', '_blank')">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">🍂 Autumn Burst</h3>
+                            <span class="language-badge">Interactive Game</span>
+                        </div>
+                    </div>
+                    <p class="card-description">
                         A delightful fall-themed Tetris bubble burst game that combines classic puzzle mechanics with seasonal aesthetics. 
                         Match colorful autumn leaves and enjoy the satisfying burst animations as you clear the board.
                     </p>
-                    <a href="https://vibe-coding-project-o75c-xv6lqwbjn-qtechdevelopments-projects.vercel.app/" target="_blank" class="project-link">
-                        <span>Play Game</span>
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                        </svg>
-                    </a>
-                    <div class="project-status">
-                        ✨ Live & Playable
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Canvas</span>
+                        <span class="tech-tag">Game Dev</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://vibe-coding-project-o75c-xv6lqwbjn-qtechdevelopments-projects.vercel.app/" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+                            Play Game
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Project 2: Philly Points -->
-            <div class="project-card">
-                <div class="project-header">
-                    <h2>🏆 Philly Points</h2>
-                    <span class="project-badge">Community Engagement</span>
-                </div>
-                <div class="project-body">
-                    <p class="project-description">
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">🏆 Philly Points</h3>
+                            <span class="language-badge">Community Platform</span>
+                        </div>
+                    </div>
+                    <p class="card-description">
                         An innovative platform designed to gamify youth engagement in Philadelphia. 
                         Young volunteers earn points and rewards for contributing their time to community service, 
                         fostering civic responsibility and making a positive impact.
                     </p>
-                    <div class="project-status">
-                        🚧 In Development
+                    <div class="tech-stack">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                    <div class="card-meta">
+                        <div class="meta-item">
+                            🚧 In Development
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" onclick="window.open('https://portfolio-website-theta-black.vercel.app/', '_blank')">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">💼 3D Portfolio</h3>
+                            <span class="language-badge">Interactive Experience</span>
+                        </div>
+                    </div>
+                    <p class="card-description">
+                        An immersive 3D portfolio website featuring an interactive tech office space built with Three.js. 
+                        Explore a realistic 3D environment and interact with objects to discover projects and skills.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">React</span>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://portfolio-website-theta-black.vercel.app/" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+                            Visit Site
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- GitHub Repositories Tab -->
+        <div id="github-tab" class="tab-content">
+            <div class="controls">
+                <input type="text" class="search-box" id="github-search" placeholder="Search repositories..." oninput="filterGithubRepos()">
+                <select class="filter-select" id="github-language-filter" onchange="filterGithubRepos()">
+                    <option value="">All Languages</option>
+                </select>
+                <select class="filter-select" id="github-sort" onchange="sortGithubRepos()">
+                    <option value="updated">Recently Updated</option>
+                    <option value="stars">Most Stars</option>
+                    <option value="name">Name</option>
+                </select>
+            </div>
+            <div id="github-content" class="content-grid">
+                <!-- Loading skeletons -->
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+            </div>
+        </div>
+        
+        <!-- Vercel Apps Tab -->
+        <div id="vercel-tab" class="tab-content">
+            <div class="controls">
+                <input type="text" class="search-box" id="vercel-search" placeholder="Search deployments..." oninput="filterVercelApps()">
+            </div>
+            <div id="vercel-content" class="content-grid">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
     </div>
+    
+    <script>
+        // State management
+        let allRepos = [];
+        let filteredRepos = [];
+        let currentTab = 'featured';
+        
+        // Vercel apps data
+        const vercelApps = [
+            {
+                name: 'Portfolio Website',
+                description: 'An immersive 3D portfolio website featuring an interactive tech office space built with Three.js',
+                url: 'https://portfolio-website-theta-black.vercel.app/',
+                tech: ['Three.js', 'TypeScript', 'React', 'WebGL'],
+                status: 'Live'
+            },
+            {
+                name: 'Autumn Burst Game',
+                description: 'A delightful fall-themed Tetris bubble burst game with smooth animations',
+                url: 'https://vibe-coding-project-o75c-xv6lqwbjn-qtechdevelopments-projects.vercel.app/',
+                tech: ['JavaScript', 'Canvas API', 'HTML5'],
+                status: 'Live'
+            }
+        ];
+        
+        // Tab switching
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Update buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Load data if needed
+            if (tabName === 'github' && allRepos.length === 0) {
+                fetchGithubRepos();
+            } else if (tabName === 'vercel') {
+                displayVercelApps();
+            }
+        }
+        
+        // Fetch GitHub repositories
+        async function fetchGithubRepos() {
+            try {
+                const response = await fetch('https://api.github.com/users/QTechDevelopment/repos?per_page=100&sort=updated');
+                const repos = await response.json();
+                
+                allRepos = repos.filter(repo => !repo.fork); // Filter out forked repos
+                filteredRepos = [...allRepos];
+                
+                // Extract unique languages
+                const languages = new Set();
+                allRepos.forEach(repo => {
+                    if (repo.language) languages.add(repo.language);
+                });
+                
+                // Populate language filter
+                const languageFilter = document.getElementById('github-language-filter');
+                languages.forEach(lang => {
+                    const option = document.createElement('option');
+                    option.value = lang;
+                    option.textContent = lang;
+                    languageFilter.appendChild(option);
+                });
+                
+                displayGithubRepos();
+            } catch (error) {
+                console.error('Error fetching repos:', error);
+                document.getElementById('github-content').innerHTML = `
+                    <div class="empty-state">
+                        <p>Unable to load repositories. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Display GitHub repositories
+        function displayGithubRepos() {
+            const container = document.getElementById('github-content');
+            
+            if (filteredRepos.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <p>No repositories found matching your criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filteredRepos.map(repo => `
+                <div class="card" onclick="window.open('${repo.html_url}', '_blank')">
+                    <div class="card-header">
+                        <div style="flex: 1;">
+                            <h3 class="card-title">${repo.name}</h3>
+                            ${repo.language ? `<span class="language-badge">${repo.language}</span>` : ''}
+                        </div>
+                    </div>
+                    <p class="card-description">${repo.description || 'No description available'}</p>
+                    <div class="card-meta">
+                        ${repo.stargazers_count > 0 ? `
+                            <div class="meta-item">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                                ${repo.stargazers_count}
+                            </div>
+                        ` : ''}
+                        ${repo.forks_count > 0 ? `
+                            <div class="meta-item">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                ${repo.forks_count}
+                            </div>
+                        ` : ''}
+                        <div class="meta-item">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                            </svg>
+                            Updated ${new Date(repo.updated_at).toLocaleDateString()}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="${repo.html_url}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+                            View Repository
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        ${repo.homepage ? `
+                            <a href="${repo.homepage}" target="_blank" class="btn btn-secondary" onclick="event.stopPropagation()">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                </svg>
+                                Demo
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Filter GitHub repos
+        function filterGithubRepos() {
+            const searchTerm = document.getElementById('github-search').value.toLowerCase();
+            const languageFilter = document.getElementById('github-language-filter').value;
+            
+            filteredRepos = allRepos.filter(repo => {
+                const matchesSearch = !searchTerm || 
+                    repo.name.toLowerCase().includes(searchTerm) || 
+                    (repo.description && repo.description.toLowerCase().includes(searchTerm));
+                const matchesLanguage = !languageFilter || repo.language === languageFilter;
+                
+                return matchesSearch && matchesLanguage;
+            });
+            
+            displayGithubRepos();
+        }
+        
+        // Sort GitHub repos
+        function sortGithubRepos() {
+            const sortBy = document.getElementById('github-sort').value;
+            
+            filteredRepos.sort((a, b) => {
+                if (sortBy === 'stars') {
+                    return b.stargazers_count - a.stargazers_count;
+                } else if (sortBy === 'name') {
+                    return a.name.localeCompare(b.name);
+                } else { // updated
+                    return new Date(b.updated_at) - new Date(a.updated_at);
+                }
+            });
+            
+            displayGithubRepos();
+        }
+        
+        // Display Vercel apps
+        function displayVercelApps() {
+            const container = document.getElementById('vercel-content');
+            
+            container.innerHTML = vercelApps.map(app => `
+                <div class="card" onclick="window.open('${app.url}', '_blank')">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">${app.name}</h3>
+                            <span class="language-badge" style="background: rgba(0, 200, 100, 0.2); color: #00c864; border-color: rgba(0, 200, 100, 0.3);">
+                                ${app.status}
+                            </span>
+                        </div>
+                    </div>
+                    <p class="card-description">${app.description}</p>
+                    <div class="tech-stack">
+                        ${app.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                    <div class="card-footer">
+                        <a href="${app.url}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+                            Visit Site
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Filter Vercel apps
+        function filterVercelApps() {
+            const searchTerm = document.getElementById('vercel-search').value.toLowerCase();
+            
+            const filtered = vercelApps.filter(app => 
+                app.name.toLowerCase().includes(searchTerm) || 
+                app.description.toLowerCase().includes(searchTerm) ||
+                app.tech.some(tech => tech.toLowerCase().includes(searchTerm))
+            );
+            
+            const container = document.getElementById('vercel-content');
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <p>No deployments found matching your search.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(app => `
+                <div class="card" onclick="window.open('${app.url}', '_blank')">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">${app.name}</h3>
+                            <span class="language-badge" style="background: rgba(0, 200, 100, 0.2); color: #00c864; border-color: rgba(0, 200, 100, 0.3);">
+                                ${app.status}
+                            </span>
+                        </div>
+                    </div>
+                    <p class="card-description">${app.description}</p>
+                    <div class="tech-stack">
+                        ${app.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                    <div class="card-footer">
+                        <a href="${app.url}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">
+                            Visit Site
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
 </body>
 </html>
