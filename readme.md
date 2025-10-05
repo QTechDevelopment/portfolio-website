@@ -29,3 +29,15 @@ npm run build
 # Serve the build using express
 npm start
 ```
+
+## GitHub Pages Deployment
+
+This website is automatically deployed to GitHub Pages on every push to the `master` branch. The deployment workflow:
+
+1. Builds the project using `npm run build`
+2. Uploads the `public/` directory as a GitHub Pages artifact
+3. Deploys to GitHub Pages
+
+The live site will be available at: `https://qtechdevelopment.github.io/portfolio-website/`
+
+To manually trigger a deployment, go to the Actions tab in the GitHub repository and run the "Deploy to GitHub Pages" workflow.
